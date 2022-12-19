@@ -13,12 +13,12 @@ public class PlayerController : MonoBehaviour
         // InverseTransformDirection : 월드 -> 로컬
         
         if (Input.GetKey(KeyCode.W))
-            transform.position += transform.TransformDirection(Vector3.forward * (Time.deltaTime * this._speed));
+            transform.Translate(Vector3.forward * (Time.deltaTime * this._speed));
         else if (Input.GetKey(KeyCode.S))
-            transform.position += transform.TransformDirection(Vector3.back * (Time.deltaTime * this._speed));
+            transform.Translate(Vector3.back * (Time.deltaTime * this._speed));
         else if (Input.GetKey(KeyCode.A))
-            transform.position += transform.TransformDirection(Vector3.left * (Time.deltaTime * this._speed));
+            transform.Translate(Vector3.left * (Time.deltaTime * this._speed));
         else if (Input.GetKey(KeyCode.D))
-            transform.position += transform.TransformDirection(Vector3.right * (Time.deltaTime * this._speed));
+            transform.Translate(Vector3.right * (Time.deltaTime * this._speed));
     }
 }
