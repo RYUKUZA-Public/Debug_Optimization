@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,12 +5,17 @@ public class PlayerController : MonoBehaviour
     // 플레이어 이동 속도
     [SerializeField]
     private float _speed = 10f;
-    
-    private void Update()
-    {
-        // TransformDirection : 로컬 -> 월드로
-        // InverseTransformDirection : 월드 -> 로컬
 
+    private void Start()
+    {
+        // 구독신청
+        // InputManager에서 키입력을 감지 했을 경우 OnKeyboard를 실행
+        Managers.Input.KeyAction -= OnKeyboard;
+        Managers.Input.KeyAction += OnKeyboard;
+    }
+
+    private void OnKeyboard()
+    {
         if (Input.GetKey(KeyCode.W))
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), .2f );
