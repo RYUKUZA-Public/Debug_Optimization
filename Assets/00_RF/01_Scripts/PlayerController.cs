@@ -4,21 +4,34 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // 플레이어 이동 속도
     [SerializeField]
     private float _speed = 10f;
     
-    void Update()
+    private void Update()
     {
         // TransformDirection : 로컬 -> 월드로
         // InverseTransformDirection : 월드 -> 로컬
-        
+
         if (Input.GetKey(KeyCode.W))
-            transform.Translate(Vector3.forward * (Time.deltaTime * this._speed));
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), .2f );
+            transform.position += Vector3.forward * (Time.deltaTime * this._speed);
+        }
         else if (Input.GetKey(KeyCode.S))
-            transform.Translate(Vector3.back * (Time.deltaTime * this._speed));
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), .2f );
+            transform.position += Vector3.back * (Time.deltaTime * this._speed);
+        }
         else if (Input.GetKey(KeyCode.A))
-            transform.Translate(Vector3.left * (Time.deltaTime * this._speed));
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), .2f );
+            transform.position += Vector3.left * (Time.deltaTime * this._speed);
+        }
         else if (Input.GetKey(KeyCode.D))
-            transform.Translate(Vector3.right * (Time.deltaTime * this._speed));
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), .2f );
+            transform.position += Vector3.right * (Time.deltaTime * this._speed);
+        }
     }
 }
