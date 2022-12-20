@@ -14,7 +14,10 @@ public class Managers : MonoBehaviour
 
     #region [Core]
     private InputManager _input = new InputManager();
+    private ResourceManager _resource = new ResourceManager();
+    
     public static InputManager Input { get { return Instance._input; } }
+    public static ResourceManager Resource { get { return Instance._resource; } }
     #endregion
 
     private void Start() => Init();
