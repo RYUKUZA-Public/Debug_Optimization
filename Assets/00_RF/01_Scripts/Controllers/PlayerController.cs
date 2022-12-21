@@ -39,11 +39,12 @@ public class PlayerController : MonoBehaviour
                 // 이동하는 값이 남은 거리보다 작다는 것을 체크 하지 않으면 캐릭터의 움직임 버그가 발생한다.
                 // 때문에 Clamp를 이용해 계산이 필요하다.
                 float moveDist = Mathf.Clamp(Time.deltaTime * _speed, 0, dir.magnitude);
-                
                 // 이동
                 transform.position += dir.normalized * moveDist;
                 // 플레이어가 목표를 바라봄
-                transform.LookAt(_destPos);
+                //transform.LookAt(_destPos);
+                // 플레이어가 목표를 바라봄 (부드럽게 회전)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
             }
         }
     }
