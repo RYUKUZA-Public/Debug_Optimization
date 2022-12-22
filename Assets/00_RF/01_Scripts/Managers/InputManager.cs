@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager
 {
@@ -17,6 +18,9 @@ public class InputManager
 
     public void OnUpdate()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         // 키입력이 있으면 전파
         if (Input.anyKey && KeyAction != null)
             KeyAction?.Invoke();
