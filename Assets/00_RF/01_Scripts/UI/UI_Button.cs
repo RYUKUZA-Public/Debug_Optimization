@@ -24,11 +24,14 @@ public class UI_Button : MonoBehaviour
         PointText,
         ScoreText
     }
-
+    
     private void Start()
     {
         Bind<Button>(typeof(Buttons));
         Bind<Text>(typeof(Texts));
+
+        // Text타입의 ScoreText의 text를 변경
+        Get<Text>((int)Texts.ScoreText).text = "Bind Test";
     }
 
     /// <summary>
@@ -47,6 +50,22 @@ public class UI_Button : MonoBehaviour
         
         // 딕셔너리에 추가
         _objects.Add(typeof(T), objects);
+    }
+
+    /// <summary>
+    /// 디셔너리로 부터 컴포넌트 취득
+    /// </summary>
+    private T Get<T>(int idx) where T : UnityEngine.Object
+    {
+        UnityEngine.Object[] objects = null;
+        // 해당 타입(Button, Text 등)을 넣어 주고 값이 있는지 없는지 체크
+        // 값이 업다면 null
+        if (_objects.TryGetValue(typeof(T), out objects) == false)
+            return null;
+        
+        // 값이 있다면 취득한 배열의 idx를 찾아서 배포
+        // ex) (int)Texts.ScoreText <- ScoreText의 인덱스
+        return objects[idx] as T;
     }
 
     private int _score = 0;
