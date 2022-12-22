@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         // 애니메이션
         Animator anime = GetComponent<Animator>();
+        anime.SetFloat("Speed", 0f);
     }
     
     private void UpdateMoving()
@@ -93,8 +94,8 @@ public class PlayerController : MonoBehaviour
         }
         
         // 이동 애니메이션
-        
         Animator anime = GetComponent<Animator>();
+        anime.SetFloat("Speed", _speed);
     }
 
     private void UpdateDie()
