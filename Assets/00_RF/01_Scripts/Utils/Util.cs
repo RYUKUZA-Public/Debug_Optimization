@@ -6,6 +6,17 @@ using UnityEngine;
 public class Util
 {
     /// <summary>
+    /// 컴포넌트를 찾거나 없다면 추가한다.
+    /// </summary>
+    public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
+    {
+        T component = go.GetComponent<T>();
+        if (component == null)
+            component = go.AddComponent<T>();
+        return component;
+    }
+
+    /// <summary>
     /// 자식 오브젝트 찾기
     /// </summary>
     public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
