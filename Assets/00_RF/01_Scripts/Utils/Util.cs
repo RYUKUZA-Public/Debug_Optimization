@@ -6,6 +6,18 @@ using UnityEngine;
 public class Util
 {
     /// <summary>
+    /// 자식 오브젝트 찾기
+    /// </summary>
+    public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
+    {
+        // 모든 GameObject에는 Transform이 존재 하기 때문에 Transform을 사용하면
+        // 기존의 "FindChild"를 재사용 할 수 있다.
+        Transform transform = FindChild<Transform>(go, name, recursive);
+        // null체크 후 돌려주기
+        return transform == null ? null : transform.gameObject;
+    }
+
+    /// <summary>
     /// 자식 컴포넌트 찾기
     /// </summary>
     public static T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object
