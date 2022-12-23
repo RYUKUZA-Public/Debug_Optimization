@@ -36,7 +36,7 @@ public class UI_Button : MonoBehaviour
         Bind<GameObject>(typeof(GameObjects));
 
         // Text타입의 ScoreText의 text를 변경
-        Get<Text>((int)Texts.ScoreText).text = "Bind Test";
+        GetText(Texts.ScoreText).text = "Bind Test";
     }
 
     /// <summary>
@@ -81,6 +81,11 @@ public class UI_Button : MonoBehaviour
         // ex) (int)Texts.ScoreText <- ScoreText의 인덱스
         return objects[idx] as T;
     }
+    
+    private Text GetText(Texts value) => Get<Text>((int)value);
+    private Button GetButton(Buttons value) => Get<Button>((int)value);
+    // TODO. 아직 Images enum 이 없음
+    private Image GetImage(int idx) => Get<Image>(idx);
 
     private int _score = 0;
 
