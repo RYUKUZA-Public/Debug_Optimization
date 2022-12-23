@@ -38,11 +38,11 @@ public class UI_Button : UI_Base
         
         // Test Image의 Handler를 받아 와서 드래그 추가
         GameObject go = GetImage((int)Images.TestImage).gameObject;
-        UI_EventHandler evt = go.GetComponent<UI_EventHandler>();
-        evt.OnDragHandler += data =>
-        {
-            go.transform.position = data.position;
-        };
+        
+        AddUIEvent(go, 
+            data => { go.transform.position = data.position; }, 
+            Define.UIEvent.Drag);
+        
     }
     
     private int _score = 0;
