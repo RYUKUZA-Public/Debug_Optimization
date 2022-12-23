@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_Button : UI_Base
@@ -32,9 +33,9 @@ public class UI_Button : UI_Base
         Bind<Text>(typeof(Texts));
         Bind<GameObject>(typeof(GameObjects));
         Bind<Image>(typeof(Images));
-
-        // Text타입의 ScoreText의 text를 변경
-        GetText((int)Texts.ScoreText).text = "Bind Test";
+        
+        //AddUIEvent를 엑스텐션메서드화 하여 바로 사용
+        GetButton((int)Buttons.PointButton).gameObject.AddUIEvent(OnButtonClicked);
         
         // Test Image의 Handler를 받아 와서 드래그 추가
         GameObject go = GetImage((int)Images.TestImage).gameObject;
@@ -42,13 +43,13 @@ public class UI_Button : UI_Base
         AddUIEvent(go, 
             data => { go.transform.position = data.position; }, 
             Define.UIEvent.Drag);
-        
     }
     
     private int _score = 0;
 
-    public void OnButtonClicked()
+    public void OnButtonClicked(PointerEventData data)
     {
         _score++;
+        GetText((int)Texts.ScoreText).text = $"점수 : {_score}";
     }
 }
