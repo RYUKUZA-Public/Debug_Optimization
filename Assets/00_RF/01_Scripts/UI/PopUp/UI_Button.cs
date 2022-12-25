@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -26,9 +27,15 @@ public class UI_Button : UI_Popup
     {
         TestImage
     }
-    
+
     private void Start()
     {
+        Init();
+    }
+
+    public override void Init()
+    {
+        base.Init();
         Bind<Button>(typeof(Buttons));
         Bind<Text>(typeof(Texts));
         Bind<GameObject>(typeof(GameObjects));
@@ -44,7 +51,7 @@ public class UI_Button : UI_Popup
             data => { go.transform.position = data.position; }, 
             Define.UIEvent.Drag);
     }
-    
+
     private int _score = 0;
 
     public void OnButtonClicked(PointerEventData data)
