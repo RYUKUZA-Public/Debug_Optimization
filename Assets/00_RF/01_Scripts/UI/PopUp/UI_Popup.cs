@@ -5,4 +5,9 @@ public class UI_Popup : UI_Base
         Managers.UI.SetCanvas(gameObject, true);
 
     }
+
+    public virtual void ClosePopupUI()
+    {
+        Managers.UI.ClosePopupUI(this);
+    }
 }
