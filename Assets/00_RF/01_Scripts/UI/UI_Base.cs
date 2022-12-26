@@ -43,7 +43,7 @@ public class UI_Base : MonoBehaviour
     /// <summary>
     /// 디셔너리로 부터 컴포넌트 취득
     /// </summary>
-    private T Get<T>(int idx) where T : UnityEngine.Object
+    protected T Get<T>(int idx) where T : UnityEngine.Object
     {
         UnityEngine.Object[] objects = null;
         // 해당 타입(Button, Text 등)을 넣어 주고 값이 있는지 없는지 체크
