@@ -5,13 +5,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-public class UI_Base : MonoBehaviour
+public abstract class UI_Base : MonoBehaviour
 {
     /// <summary>
     /// 어떤 타입인지 모르기 때문에 Text, Button 등의 최상위 부모를 사용
     /// 타입을 넣어 주면 해당 타입의 목록을 취득
     /// </summary>
-    private Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, Object[]>(); 
+    private Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, Object[]>();
+
+    public abstract void Init();
     
     /// <summary>
     /// 리플렉션을 이용하여 Type에 enum을 넘겨 준다

@@ -1,6 +1,7 @@
-using UnityEngine;
-
-public class UI_Inven_Item : MonoBehaviour
+public class UI_Inven_Item : UI_Base
 {
-    
+    public override void Init()
+    {
+        
+    }
 }
