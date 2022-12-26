@@ -23,11 +23,6 @@ public class PlayerController : MonoBehaviour
         // 구독신청
         Managers.Input.MouseAction -= OnMouseClicked;
         Managers.Input.MouseAction += OnMouseClicked;
-
-        // TODO.
-        //UI_Button ui = Managers.UI.ShowPopupUI<UI_Button>();
-        //Managers.UI.ClosePopupUI(ui);
-        Managers.UI.ShowSceneUI<UI_Inven>();
     }
     
     private void Update()
