@@ -18,8 +18,14 @@ public class ResourceManager
             Debug.Log($"Prefab 로드 실패 {path}");
             return null;
         }
-
-        return Object.Instantiate(prefab, parent);
+        
+        GameObject go = Object.Instantiate(prefab, parent);
+        // (Clone) 텍스트 제거
+        int index = go.name.IndexOf("(Clone)");
+        if (index > 0)
+            go.name = go.name.Substring(0, index);
+        
+        return go;
     }
 
     // 파괴
