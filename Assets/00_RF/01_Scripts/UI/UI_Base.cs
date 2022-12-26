@@ -62,6 +62,7 @@ public abstract class UI_Base : MonoBehaviour
     protected Button GetButton(int idx) => Get<Button>(idx);
     // TODO. 아직 Images enum 이 없음
     protected Image GetImage(int idx) => Get<Image>(idx);
+    protected GameObject GetObject(int idx) => Get<GameObject>(idx);
 
     /// <summary>
     /// UI이벤트를 추가 (클리그, 드래그, ...)
