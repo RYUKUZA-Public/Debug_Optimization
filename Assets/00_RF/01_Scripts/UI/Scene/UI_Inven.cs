@@ -31,6 +31,10 @@ public class UI_Inven : UI_Scene
             GameObject item = Managers.Resource.Instantiate("UI/Scene/UI_Inven_Item");
             // 그리드 자식으로 등록
             item.transform.SetParent(gridPanel.transform);
+            // 체크
+            UI_Inven_Item invenItem = Util.GetOrAddComponent<UI_Inven_Item>(item);
+            // 아이템 데이터 셋팅
+            invenItem.SetInfo($"집판검{i}번");
         }
     }
 }
