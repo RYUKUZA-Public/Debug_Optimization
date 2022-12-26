@@ -15,11 +15,13 @@ public class Managers : MonoBehaviour
     private InputManager _input = new InputManager();
     private ResourceManager _resource = new ResourceManager();
     private SceneManagerEx _scene = new SceneManagerEx();
+    private SoundManager _sound = new SoundManager();
     private UIManager _ui = new UIManager();
     
     public static InputManager Input { get { return Instance._input; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
+    public static SoundManager Sound { get { return Instance._sound; } }
     public static UIManager UI { get { return Instance._ui; } }
     #endregion
 
@@ -45,6 +47,8 @@ public class Managers : MonoBehaviour
     
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
+            // 사운드 매니저 초기화
+            s_instance._sound.Init();
         }
     }
 }
