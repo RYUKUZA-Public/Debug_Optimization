@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoginScene : BaseScene
 {
@@ -12,7 +11,7 @@ public class LoginScene : BaseScene
 
     public override void Clear()
     {
-        
+        Debug.Log("로그인씬 Clear");
     }
 
     /// <summary>
@@ -23,7 +22,8 @@ public class LoginScene : BaseScene
         // 씬이동
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SceneManager.LoadSceneAsync("InGame");
+            Managers.Scene.LoadScene(Define.Scene.InGame);
+            //SceneManager.LoadSceneAsync("InGame");
         }
     }
 }
