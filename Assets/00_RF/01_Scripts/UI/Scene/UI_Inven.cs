@@ -28,9 +28,7 @@ public class UI_Inven : UI_Scene
         for (int i = 0; i < 8; i++)
         {
             // 아이템 Prefab 생성
-            GameObject item = Managers.Resource.Instantiate("UI/Scene/UI_Inven_Item");
-            // 그리드 자식으로 등록
-            item.transform.SetParent(gridPanel.transform);
+            GameObject item = Managers.UI.MakeSubItem<UI_Inven_Item>(parent: gridPanel.transform).gameObject;
             // 체크
             UI_Inven_Item invenItem = item.GetOrAddComponent<UI_Inven_Item>();
             
