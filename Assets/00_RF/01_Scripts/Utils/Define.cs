@@ -1,5 +1,13 @@
 public class Define
 {
+    public enum Scene
+    {
+        Unknown,
+        Login,
+        Lobby,
+        InGame
+    }
+    
     public enum UIEvent
     {
         Click,
