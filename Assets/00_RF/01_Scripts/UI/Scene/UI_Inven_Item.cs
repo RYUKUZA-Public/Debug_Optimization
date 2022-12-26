@@ -29,7 +29,7 @@ public class UI_Inven_Item : UI_Base
         item.GetComponent<Text>().text = _name;
         
         // 클릭 이벤트 등록 (버튼)
-        Get<GameObject>((int)GameObjects.ItemIcon).AddUIEvent((data) =>
+        Get<GameObject>((int)GameObjects.ItemIcon).BindEvent((data) =>
         {
             Debug.Log($"{item.GetComponent<Text>().text} 아이템 클릭");
         });

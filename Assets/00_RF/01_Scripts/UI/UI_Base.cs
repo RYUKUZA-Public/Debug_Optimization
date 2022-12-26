@@ -67,7 +67,7 @@ public abstract class UI_Base : MonoBehaviour
     /// <summary>
     /// UI이벤트를 추가 (클리그, 드래그, ...)
     /// </summary>
-    public static void AddUIEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
+    public static void BindEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
     {
         // UI_EventHandler을 찾거나 없다면 추가
         UI_EventHandler evt = go.GetOrAddComponent<UI_EventHandler>();

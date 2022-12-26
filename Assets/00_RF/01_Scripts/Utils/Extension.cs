@@ -18,8 +18,8 @@ public static class Extension
     /// <summary>
     /// UI이벤트를 추가 (클리그, 드래그, ...)
     /// </summary>
-    public static void AddUIEvent(this GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
+    public static void BindEvent(this GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
     {
-        UI_Base.AddUIEvent(go, action, type);
+        UI_Base.BindEvent(go, action, type);
     }
 }

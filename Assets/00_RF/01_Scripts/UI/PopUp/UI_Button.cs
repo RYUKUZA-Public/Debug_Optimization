@@ -42,12 +42,12 @@ public class UI_Button : UI_Popup
         Bind<Image>(typeof(Images));
         
         //AddUIEvent를 엑스텐션메서드화 하여 바로 사용
-        GetButton((int)Buttons.PointButton).gameObject.AddUIEvent(OnButtonClicked);
+        GetButton((int)Buttons.PointButton).gameObject.BindEvent(OnButtonClicked);
         
         // Test Image의 Handler를 받아 와서 드래그 추가
         GameObject go = GetImage((int)Images.TestImage).gameObject;
         
-        AddUIEvent(go, 
+        BindEvent(go, 
             data => { go.transform.position = data.position; }, 
             Define.UIEvent.Drag);
     }
