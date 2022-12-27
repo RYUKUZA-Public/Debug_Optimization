@@ -41,7 +41,7 @@ public class SoundManager
     /// <summary>
     /// 재생
     /// </summary>
-    public void Play(Define.Sound type, string path, float pitch = 1.0f)
+    public void Play(string path, Define.Sound type = Define.Sound.Effect, float pitch = 1.0f)
     {
         // 경로에 Sounds가 없다면 붙여 주자
         if (path.Contains("Sounds/") == false)
@@ -58,7 +58,16 @@ public class SoundManager
                 return;
             }
             
-            //TODO.
+            // Bgm 오디오 소스
+            AudioSource audioSource = _audioSources[(int)Define.Sound.Bgm];
+            
+            // 다른 BGM이 재생중 이라면 정지 한다.
+            if (audioSource.isPlaying)
+                audioSource.Stop();
+
+            audioSource.pitch = pitch;
+            audioSource.clip = audioClip;
+            audioSource.Play();
         }
         // Effect
         else
