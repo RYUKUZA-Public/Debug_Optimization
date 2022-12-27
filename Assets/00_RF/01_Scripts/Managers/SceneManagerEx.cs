@@ -11,7 +11,7 @@ public class SceneManagerEx
     public void LoadScene(Define.Scene type)
     {
         // 현재 씬을 청소
-        CurrentScene.Clear();
+        Managers.Clear();
         // 이동
         SceneManager.LoadScene(GetSceneName(type));
     }
@@ -23,4 +23,13 @@ public class SceneManagerEx
     {
         return System.Enum.GetName(typeof(Define.Scene), type);
     }
+
+    /// <summary>
+    /// 클리어
+    /// </summary>
+    public void Clear()
+    {
+        CurrentScene.Clear();
+    }
+
 }

@@ -42,4 +42,13 @@ public class InputManager
             }
         }
     }
+    
+    /// <summary>
+    /// 클리어
+    /// </summary>
+    public void Clear()
+    {
+        KeyAction = null;
+        MouseAction = null;
+    }
 }

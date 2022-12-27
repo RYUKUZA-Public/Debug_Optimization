@@ -51,4 +51,16 @@ public class Managers : MonoBehaviour
             s_instance._sound.Init();
         }
     }
+
+    /// <summary>
+    /// 씬 이동시 처리해야 할것을 이곳에서
+    /// 일괄 처리 한다.
+    /// </summary>
+    public static void Clear()
+    {
+        Sound.Clear();
+        Input.Clear();
+        Scene.Clear();
+        UI.Clear();
+    }
 }
