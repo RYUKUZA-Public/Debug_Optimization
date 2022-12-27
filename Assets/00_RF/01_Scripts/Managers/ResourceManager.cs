@@ -11,6 +11,7 @@ public class ResourceManager
     // 생성
     public GameObject Instantiate(string path, Transform parent = null)
     {
+        // 1. 오리지널도 이미 가지고 있을 경우 바로 사용
         GameObject prefab = Load<GameObject>($"Prefabs/{path}");
 
         if (prefab == null)
@@ -19,12 +20,10 @@ public class ResourceManager
             return null;
         }
         
+        // 2. 혹시 풀링 된 오브젝트가 있다면 재사용
         GameObject go = Object.Instantiate(prefab, parent);
         // (Clone) 텍스트 제거
-        int index = go.name.IndexOf("(Clone)");
-        if (index > 0)
-            go.name = go.name.Substring(0, index);
-        
+        go.name = prefab.name;
         return go;
     }
 
@@ -33,6 +32,7 @@ public class ResourceManager
     {
         if (go == null)
             return;
+        // 3. 풀링이 필요한경우 풀링 매니저에게 처리를 부탁
         
         Object.Destroy(go);
     }
