@@ -44,25 +44,25 @@ public class SoundManager
     }
 
     /// <summary>
-    /// 재생
+    /// 재생 path 버전
     /// </summary>
     public void Play(string path, Define.Sound type = Define.Sound.Effect, float pitch = 1.0f)
     {
-        // 경로에 Sounds가 없다면 붙여 주자
-        if (path.Contains("Sounds/") == false)
-            path = $"Sounds/{path}";
+        AudioClip audioClip = GetOrAddAudioClip(path, type);
+        Play(audioClip, type, pitch);
+    }
+    
+    /// <summary>
+    /// TODO. 재생 AudioClip 버전
+    /// </summary>
+    public void Play(AudioClip audioClip, Define.Sound type = Define.Sound.Effect, float pitch = 1.0f)
+    {
+        if (audioClip == null)
+            return;
         
         // BGM
         if (type == Define.Sound.Bgm)
         {
-            // 해당 클립을 로드
-            AudioClip audioClip = Managers.Resource.Load<AudioClip>(path);
-            if (audioClip == null)
-            {
-                Debug.Log($"오디오 클립이 없습니다. {audioClip}");
-                return;
-            }
-            
             // Bgm 오디오 소스
             AudioSource audioSource = _audioSources[(int)Define.Sound.Bgm];
             
@@ -77,14 +77,6 @@ public class SoundManager
         // Effect
         else
         {
-            // 해당 클립을 로드
-            AudioClip audioClip = GetOrAddAudioClip(path); //Managers.Resource.Load<AudioClip>(path);
-            if (audioClip == null)
-            {
-                Debug.Log($"오디오 클립이 없습니다. {audioClip}");
-                return;
-            }
-            
             // Effect 오디오 소스
             AudioSource audioSource = _audioSources[(int)Define.Sound.Effect];
             audioSource.pitch = pitch;
@@ -96,17 +88,32 @@ public class SoundManager
     /// <summary>
     /// 오디오 클립을 가져 오거나 추가
     /// </summary>
-    private AudioClip GetOrAddAudioClip(string path)
+    private AudioClip GetOrAddAudioClip(string path, Define.Sound type = Define.Sound.Effect)
     {
+        // 경로에 Sounds가 없다면 붙여 주자
+        if (path.Contains("Sounds/") == false)
+            path = $"Sounds/{path}";
+        
         AudioClip audioClip = null;
         
-        // 찾고자 하는 오디오 클립이 있는지 검색
-        if (_audioClips.TryGetValue(path, out audioClip) == false)
-        {
-            // 없다면 로드 후 추가
+        // BGM 
+        if (type == Define.Sound.Bgm)
+            // 해당 클립을 로드
             audioClip = Managers.Resource.Load<AudioClip>(path);
-            _audioClips.Add(path, audioClip);
+        // Effect
+        else
+        {
+            // 찾고자 하는 오디오 클립이 있는지 검색
+            if (_audioClips.TryGetValue(path, out audioClip) == false)
+            {
+                // 없다면 로드 후 추가
+                audioClip = Managers.Resource.Load<AudioClip>(path);
+                _audioClips.Add(path, audioClip);
+            }
         }
+        
+        if (audioClip == null)
+            Debug.Log($"오디오 클립이 없습니다. {audioClip}");
         
         return audioClip;
     }
