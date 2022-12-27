@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager
@@ -5,11 +6,15 @@ public class SoundManager
     // mp3플레이어 -> AudioSource (소리의 근원)
     // mp3 -> AudioClip
     // 귀 -> AudioListener
-    
+
     /// <summary>
     /// Define에 설정한 사운드 타입
     /// </summary>
     private AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
+    /// <summary>
+    /// 경로와 클립 캐싱
+    /// </summary>
+    private Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
     /// <summary>
     /// 초기화
@@ -73,7 +78,7 @@ public class SoundManager
         else
         {
             // 해당 클립을 로드
-            AudioClip audioClip = Managers.Resource.Load<AudioClip>(path);
+            AudioClip audioClip = GetOrAddAudioClip(path); //Managers.Resource.Load<AudioClip>(path);
             if (audioClip == null)
             {
                 Debug.Log($"오디오 클립이 없습니다. {audioClip}");
@@ -85,6 +90,41 @@ public class SoundManager
             audioSource.pitch = pitch;
             // 한번 재생
             audioSource.PlayOneShot(audioClip);
+        }
+    }
+    
+    /// <summary>
+    /// 오디오 클립을 가져 오거나 추가
+    /// </summary>
+    private AudioClip GetOrAddAudioClip(string path)
+    {
+        AudioClip audioClip = null;
+        
+        // 찾고자 하는 오디오 클립이 있는지 검색
+        if (_audioClips.TryGetValue(path, out audioClip) == false)
+        {
+            // 없다면 로드 후 추가
+            audioClip = Managers.Resource.Load<AudioClip>(path);
+            _audioClips.Add(path, audioClip);
+        }
+        
+        return audioClip;
+    }
+    
+    /// <summary>
+    /// 클리어
+    /// 본 스크립트는 Dontdestroyonloadd이기 때문에
+    /// 메모리가 무한이 쌓이게 된다.
+    /// 때문에 주의해서 타이밍에 마춰 Clear를 관리 해야 한다.
+    /// </summary>
+    public void Clear()
+    {
+        _audioClips.Clear();
+
+        foreach (AudioSource audioSource in _audioSources)
+        {
+            audioSource.clip = null;
+            audioSource.Stop();
         }
     }
 }
