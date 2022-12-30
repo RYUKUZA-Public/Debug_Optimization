@@ -7,6 +7,8 @@ public class InGameScene : BaseScene
         SceneType = Define.Scene.InGame;
         // 인벤토리 UI
         Managers.UI.ShowSceneUI<UI_Inven>();
+
+        var dix = Managers.Data.StatsDict;
     }
 
     public override void Clear()
