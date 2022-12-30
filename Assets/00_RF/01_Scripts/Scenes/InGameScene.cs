@@ -13,5 +13,6 @@ public class InGameScene : BaseScene
 
     public override void Clear()
     {
+        
     }
 }
