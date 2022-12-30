@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LoginScene : BaseScene
@@ -7,9 +8,15 @@ public class LoginScene : BaseScene
         base.Init();
         SceneType = Define.Scene.Login;
 
-        for (int i = 0; i < 10; i++)
+        List<GameObject> _list = new List<GameObject>();
+        for (int i = 0; i < 5; i++)
         {
-            Managers.Resource.Instantiate("Player");
+            _list.Add(Managers.Resource.Instantiate("Player"));
+        }
+
+        foreach (var l in _list)
+        {
+            Managers.Resource.Destroy(l);
         }
         
     }
