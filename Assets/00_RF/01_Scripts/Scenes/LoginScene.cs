@@ -7,18 +7,6 @@ public class LoginScene : BaseScene
     {
         base.Init();
         SceneType = Define.Scene.Login;
-
-        List<GameObject> _list = new List<GameObject>();
-        for (int i = 0; i < 5; i++)
-        {
-            _list.Add(Managers.Resource.Instantiate("Player"));
-        }
-
-        foreach (var l in _list)
-        {
-            Managers.Resource.Destroy(l);
-        }
-        
     }
 
     public override void Clear()
