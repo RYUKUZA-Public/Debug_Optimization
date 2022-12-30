@@ -28,7 +28,9 @@ public class PoolManager
         public void Init(GameObject original, int count = 5)
         {
             Original = original;
+            // 루트로 사용할 오브젝트를 생성
             Root = new GameObject().transform;
+            // 데이터에 따라 이름 설정
             Root.name = $"{original.name}_Root";
             
             // 카운트 만큼 생성 후 Push
@@ -41,13 +43,17 @@ public class PoolManager
         /// </summary>
         public Poolable Create()
         {
-            GameObject go = Object.Instantiate(Original);
+            // 오브젝트 생성 (클론)
+            GameObject go = Object.Instantiate<GameObject>(Original);
+            // 이름 정리
             go.name = Original.name;
+            // Poolable형식으로 리턴
             return go.GetOrAddComponent<Poolable>();
         }
         
         /// <summary>
         /// Push 반환
+        /// Stack에 추가및 반환시 필요 작업
         /// </summary>
         public void Push (Poolable poolable)
         {
@@ -88,6 +94,8 @@ public class PoolManager
     }
     #endregion
     
+    // PoolManager는 여러가지 pool을 가지고 있다.
+    // 그 pool 목록을 딕셔너리로 관리
     private Dictionary<string, Pool> _pools = new Dictionary<string, Pool>();
     private Transform _root;
     
@@ -100,12 +108,16 @@ public class PoolManager
         }
     }
 
+    /// <summary>
+    /// Pool 생성
+    /// </summary>
     private void CreatePool(GameObject original, int count = 5)
     {
         Pool pool = new Pool();
         pool.Init(original, count);
         pool.Root.parent = _root;
         
+        // 딕셔너리에 추가
         _pools.Add(original.name, pool);
     }
 
@@ -137,6 +149,9 @@ public class PoolManager
         return _pools[original.name].Pop(parent);
     }
 
+    /// <summary>
+    /// 원본 취득
+    /// </summary>
     public GameObject GetOriginal(string name)
     {
         if (_pools.ContainsKey(name) == false)
