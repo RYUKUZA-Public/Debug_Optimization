@@ -12,13 +12,16 @@ public class Managers : MonoBehaviour
     private static Managers Instance { get { Init(); return s_instance; } }
 
     #region [Core]
+
+    private DataManager _data = new DataManager();
     private InputManager _input = new InputManager();
     private PoolManager _pool = new PoolManager();
     private ResourceManager _resource = new ResourceManager();
     private SceneManagerEx _scene = new SceneManagerEx();
     private SoundManager _sound = new SoundManager();
     private UIManager _ui = new UIManager();
-    
+
+    public static DataManager Data { get { return Instance._data; } }
     public static InputManager Input { get { return Instance._input; } }
     public static PoolManager Pool { get { return Instance._pool; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
@@ -49,6 +52,9 @@ public class Managers : MonoBehaviour
     
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
+            
+            // 데이터 매니저 초기화
+            s_instance._data.Init();
             // 풀 매니저 초기화
             s_instance._pool.Init();
             // 사운드 매니저 초기화
