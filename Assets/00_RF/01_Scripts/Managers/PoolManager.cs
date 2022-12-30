@@ -86,6 +86,9 @@ public class PoolManager
             
             // 활성화 상태
             poolable.gameObject.SetActive(true);
+            
+            
+            
             poolable.transform.parent = parent;
             poolable.isUsing = true;
             

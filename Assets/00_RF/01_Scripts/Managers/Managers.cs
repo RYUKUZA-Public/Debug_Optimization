@@ -49,6 +49,8 @@ public class Managers : MonoBehaviour
     
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
+            // 풀 매니저 초기화
+            s_instance._pool.Init();
             // 사운드 매니저 초기화
             s_instance._sound.Init();
         }
@@ -64,5 +66,6 @@ public class Managers : MonoBehaviour
         Input.Clear();
         Scene.Clear();
         UI.Clear();
+        Pool.Clear();
     }
 }
