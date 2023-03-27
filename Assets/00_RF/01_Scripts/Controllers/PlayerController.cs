@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
         if (_state == PlayerState.Die)
             return;
         
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(Camera.main.transform.position, ray.direction * 100f, Color.magenta, 1.0f);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
+        UnityEngine.Debug.DrawRay(Camera.main.transform.position, ray.direction * 100f, Color.magenta, 1.0f);
         
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Wall")))
