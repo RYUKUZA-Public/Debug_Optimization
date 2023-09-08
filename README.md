@@ -11,6 +11,9 @@ Unity의 Debug는 빌드 된 애플리케이션에도 동작 하므로 Debug를 
 4. LogErrorFormat
 5. LogWarning
 6. LogWarningFormat
+7. Assert
+8. AssertFormat
+9. WriteLine
 
 추가로 필요한 부분은 위를 참고하여 추가하여 사용할 수 있다.
 
@@ -27,5 +30,8 @@ UnityのDebugは、ビルドされた、アプリケーションにも、動作�
 4. LogErrorFormat
 5. LogWarning
 6. LogWarningFormat
+7. Assert
+8. AssertFormat
+9. WriteLine
 
 追加で、必要な部分は、上記を参考にして追加して使用することができる。
